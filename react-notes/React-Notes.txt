@@ -1,0 +1,259 @@
+Intro
+
+- React is an open source Javascript Library for building UI
+    - Angular -  Frameworks
+    - Vue - Frameworks
+    - Aurelia -  Frameworks
+
+- It uses JSX that makes it easier for web development to modify DOM by using simple
+HTML - style code ----> Javascript Extension
+    - JSX helps you write HTML inside JS
+    - High level JS and not recognised by the browser by default
+
+- Used for creating SPAs - Single Page Application
+
+- React is referred to as the V (View) in the MVC
+
+
+
+Why do we use React
+
+- React is developed and maintained by Facebook.
+- Very popular among front end developers.
+- Huge community.
+- Easy to use and maintain.
+- Lightweight as compared to other UI frameworks.
+- Virtual DOM
+- React follows a component based architecture -> Thinking in terms of components
+
+What is Virtual DOM
+
+
+Components in terms of UI are something that has a structure, a style and a behaviour
+ Sometimes they can be reusable. It also has a state.
+
+SPA -Single Page Application
+Gmail -  SPA
+
+Disadvantage
+SEO -  Search Engine Optimization (significantly reduced)
+
+
+Pre-Requisites
+- HTML, CSS
+- Javascript Basics
+- ES6 syntax
+- Basic fundamentals of Programming
+
+We can write React Apps using JS but we can also use Typescript
+- Type Checking
+- Fully compatible with ES6+
+- Modularity
+- Supports Classes and Objects
+- Syntax Similar to Java
+
+Environment for React Application- Nodejs, VSCode, Browser tools for react.
+
+
+Different ways to use React
+- By using CDN (Content Delivery Network)
+- npx create-react-app <my-app name>
+
+npm i -g create-react-app
+create-react-app app
+
+Creating Components -> Two Approaches -
+  - Functional Approaches
+  - Class based Approach (Not Deprecated)
+
+
+props are used to send data between two components.
+Parent -> child (uni - directional)
+
+
+State is actually a variable where you store the data that your UI depends on.
+
+In order to use state in Functional components you have to use Hooks - useState Hooks
+UseState gives a variable to store the state and a method to modify or update the state. 
+It should always accept an initial value for the state
+
+useEffect Hook -  will execute once your component is rendered on the browser;
+
+
+JSX is somewhat similar to HTML except for a few variations.
+ CSS class attribute in HTML ---> <div className=""></div>
+
+ It is a mix of Javascript and HTML.
+To write JS code inside JSX it should be written inside Curly braces {}.
+
+In functional components, we return the JSX to render the UI onto browser
+
+This rendering of UI is done by ReactDOM library which provides interaction with the DOM in the browser
+
+
+LifeCycle Events for a component can be classified in to two categories:
+
+- Mount - constructor ->, render(), ->  componentDidMount ()
+- Update - shouldComponentUpdate -> render -> ComponentDIdUpdate
+
+rxjs - - Observable
+
+- UnMount - componentDidUnMount
+
+useEffect Hook to simulate Component LifeCycle Events
+
+
+
+- Webpack is a tool to bundle our code / module bundler
+ - Why does this tool exist?
+ - What kind of problem is it solving?
+
+Examines all modules in the app 
+and creates a dependency tree/graph
+ and puts all of the files together into one or more bundle
+which can be referenced via index.html files
+
+create-react-app is using webpack
+
+webpack to do transformations.
+These transformations can be done using loaders / plugins
+
+
+Sass -> CSS
+
+JSX in react (modern JS/ ES6) to plain ES5 code 
+
+
+Webpack needs an entry file so that it can check the dependencies
+
+Webpack can have loaders or plugins to do transformations -  but 
+you need to install separately and tell webpack to use it
+
+Webpack needs an output location
+
+
+Issues with prop Drilling
+(pass props down the multiple leyers of components to the one which actually needs it)
+
+- If you wanted to add another prop then you need to ensure that you pass down
+that prop thru multiple levels of component tree
+
+- Can create unnecessary confusion as we do not know what the props are intended for.
+
+- It kind of creates a dependency on the middle layer components as they have to pass on props
+So if you want to add a new component in between the layers then you also would have to use that props and pass it
+
+
+React Context API - to solve Prop Drilling issue
+
+React Context is helping by giving us  :-
+- A way to declare the data that we want available throughout our component tree
+- A way for any component in the tree that requires that data to be able to subscribe to that data
+
+const myContext = React.createContext(Default value (can be a state, a value, a boolean))
+
+myContext.Provider - allows us to declare the data we need to give to other components or subscribe
+
+myContext.Consumer - allows any component that needs the data to be able to subscribe to it.
+
+<Consumer></Consumer> is usually used by class components , for functional components useContext hook
+
+
+const myContext = React.createContext(Default Value)
+{wedewd: ewdfewf}
+<myContext.Provider value={datayouneedtopass} >
+  <Component-2/>
+<Component />-------------> Any child of this component will be able to subscribe
+</myContext.Provider>
+
+const datayouneedtopass = useContext(myContext)
+
+
+----------------------- Redux -----------------
+
+State - All the outcomes depend on changes made to the state in a stable and predictabl way.
+
+Any mismanagement of state can result in the disruption of the system.
+
+hence we need to make the state more predictable but how?
+- Store all the state in a common location 
+- Have strict rules to update the state. We don't want anything to change that state which would lead to bugs.
+- We can test the state changes more easily
+- Same location also enables us to create tools to check and experiment with the state.
+
+Using Redux
+  - Can get a store to store the states
+  - Provides a way for anyone to get the state from the store in a proper way
+  - Provides a way to listen for state changes in the state tree
+  - Provides a way to update the states in the state tree (store)
+
+
+Redux is a standalone library that can be used by any system - not made only for react
+
+State / Store is immutable 
+
+- State
+- Store - The immutable state tree
+- Actions -  Actions are instructions on what to do with state. 
+    It is an object { type: "DEPOSIT_AMOUNT", payload: 10 }
+- Action Creators - Create Actions
+- Reducers (based array.reduce) - Take in the prev/ initial state and the action gives us a newState 
+  which will be updated on the store
+- Dispatchers - is used to dispatch an action to the store
+
+
+Steps to use Redux in Class Components
+
+1) Import Provider and use like React Context Provider to provide store to component
+ <Provider store={store}>
+  <Root Component of react>
+</Provider
+
+2) Create store by using 
+
+createStore(
+  rootReducer,
+  initialState,
+  composeEnhancers(applyMiddleware(...middleware))
+);
+
+3) Define rootReducer in reducers folder and export using combineReducers()
+
+4) Define your own reducer function and export it. It will be imported by the rootReducer to combine
+  This reducer will accept a state (initial) and an action and returns either the original state
+  or return a new State based on the action
+
+5) Define action types in types.js file in the actions folder which are exported
+
+6) Create an action creator file in actions folder and 
+inside which we define the dispatcher method which we are exporting
+This dispatcher method returns an action object containing action type and payload
+
+return function (dispatch) {
+    fetch('http://localhost:3001/todos', {
+      body: JSON.stringify(todoItem),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+
+      .then((todos) =>
+        dispatch({
+          type: NEW_TODOS,
+          payload: todos,
+        })
+      );
+  };
+
+7) Need to connect the component and the store 
+using connect method provided by react-redux library.
+
+const mapStateToProps = (state) => ({
+  todos: state.todos.todos,
+});
+
+export default connect(mapStateToProps, { fetchTodos })(TodoList);
+
+
